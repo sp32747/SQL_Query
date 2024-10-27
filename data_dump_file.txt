@@ -1,0 +1,86 @@
+
+
+# data_prodigy_youtube
+
+CREATE DATABASE University;
+
+USE University;
+
+CREATE TABLE AllStudents(
+	StudentID int NOT NULL,
+	FirstName varchar(50) NOT NULL,
+	LastName varchar(50) NOT NULL,
+	Branch varchar(100) NULL,
+	Email varchar(100) NULL,
+	PhoneNo varchar(20) NULL,
+	MarksObtained int NULL,
+	BranchID int NOT NULL
+);
+
+CREATE TABLE Branch(
+	BranchID int NOT NULL,
+	BranchName varchar(10) NULL,
+	Capacity int NULL
+);
+
+
+
+
+INSERT into AllStudents  VALUES (1, 'Aarav', 'Kumar', 'ECE', 'aarav.kumar@example.com', '1234567890', 800,102);
+INSERT into AllStudents  VALUES (2, 'Aditi', 'Sharma', 'CSE', 'aditi.sharma@example.com', NULL, 900,101);
+INSERT into AllStudents  VALUES (3, 'Advait', 'Gupta', 'EE', NULL, '9876543210', 920,100);
+INSERT into AllStudents  VALUES (4, 'Aishwarya', 'Singh', 'ME', 'aishwarya.singh@example.com', '9988776655', 750,103);
+INSERT into AllStudents  VALUES (5, 'Akash', 'Verma', 'IT', NULL, NULL, 820,104);
+INSERT into AllStudents  VALUES (6, 'Ananya', 'Choudhary', 'ECE', 'ananya.choudhary@example.com', '9090909090', 930,102);
+INSERT into AllStudents  VALUES (7, 'Aniket', 'Yadav', 'CSE', 'aniket.yadav@example.com', NULL, 850,101);
+INSERT into AllStudents  VALUES (8, 'Anisha', 'Shah', 'EE', NULL, '9999999999', 780,100);
+INSERT into AllStudents  VALUES (9, 'Anuj', 'Gupta', 'ME', 'anuj.gupta@example.com', '8888888888', 890,103);
+INSERT into AllStudents  VALUES (10, 'Arjun', 'Rao', 'IT', NULL, NULL, 760,104);
+INSERT into AllStudents  VALUES (11, 'Aryan', 'Patel', 'ECE', 'aryan.patel@example.com', '7777777777', 810,102);
+INSERT into AllStudents  VALUES (12, 'Ayush', 'Nair', 'CSE', 'ayush.nair@example.com', NULL, 920,101);
+INSERT into AllStudents  VALUES (13, 'Bhavya', 'Deshpande', 'EE', NULL, '7777777777', 930,100);
+INSERT into AllStudents  VALUES (14, 'Chetan', 'Raj', 'ME', 'chetan.raj@example.com', '8765432109', 870,103);
+INSERT into AllStudents  VALUES (15, 'Daksh', 'Mehta', 'CSE', 'daksh.mehta@example.com', NULL, 920,101);
+INSERT into AllStudents  VALUES (16, 'Diya', 'Sinha', 'EE', 'diya.sinha@example.com', '7654321098', 890,100);
+INSERT into AllStudents  VALUES (17, 'Tanvi', 'Rao', 'ME', 'tanvi.rao@example.com', '9090909090', 850,103);
+						
+INSERT into Branch VALUES (100, 'EE', 200);
+INSERT into Branch VALUES (101, 'CSE', 200);
+INSERT into Branch VALUES (102, 'ECE', 150);
+INSERT into Branch VALUES (103, 'ME', 150);
+INSERT into Branch VALUES (104, 'IT', 200);
+
+
+
+===========================
+
+
+CREATE TABLE products (
+  product_id INT PRIMARY KEY,
+  product_name VARCHAR(50),
+  category VARCHAR(50)
+);
+
+INSERT INTO products (product_id, product_name, category) VALUES
+  (1, 'Laptops', 'Electronics'),
+  (2, 'Jeans', 'Clothing'),
+  (3, 'Chairs', 'Home Appliances');
+
+CREATE TABLE sales (
+  product_id INT,
+  year INT,
+  total_sales_revenue DECIMAL(10, 2),
+  PRIMARY KEY (product_id, year),
+  FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+INSERT INTO sales (product_id, year, total_sales_revenue) VALUES
+  (1, 2019, 1000.00),
+  (1, 2020, 1200.00),
+  (1, 2021, 1100.00),
+  (2, 2019, 500.00),
+  (2, 2020, 600.00),
+  (2, 2021, 900.00),
+  (3, 2019, 300.00),
+  (3, 2020, 450.00),
+  (3, 2021, 400.00);

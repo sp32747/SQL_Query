@@ -24,7 +24,7 @@ Select * from allstudents where firstname like '%ya';
 Select * from allstudents where branch like '_E'and email is not null;
 
 # ordering by marks in DESC order  then ordering by first name with default ascending order
-Select * from allstudents   order by marksobtained desc , firstname   ;
+Select * from allstudents   order by marksobtained desc  ;
 
 #select top 5 records
 select  * from allstudents order by marksobtained desc limit 5 ;
@@ -56,6 +56,9 @@ select studentid,firstname,lastname,marksobtained
 from allstudents where branch='cse' and
 marksobtained=(select max(marksobtained) from allstudents where branch='cse')
 ;
+# below query skips the same maximum marks if you give a higher unintended rows wil come
+select studentid,firstname,lastname,marksobtained 
+from allstudents where branch='cse' ORDER BY marksobtained desc limit 3;
 
 # second maximum mark
 select studentid,firstname,lastname,marksobtained 
@@ -125,7 +128,38 @@ from allstudents;
 ## SELECT name, salary FROM employee ORDER BY salary DESC LIMIT (N-1), 1; 
 
 
+select   branch , avg(marksobtained)
+from  allstudents 
+GROUP BY branch;
+
 ## 2 nd highest mark
+## CTE commom table expression( some times called as "with Clause")
+
+
+
+with cte_avgmarks as 
+(
+select   branch , avg(marksobtained) as avgmark
+from  allstudents 
+GROUP BY branch
+)
+select studentid,firstname,lastname,a.branch , marksobtained 
+from allstudents a
+inner join cte_avgmarks c
+on a.branch=c.branch
+and a.marksobtained > c.avgmark;
+
+select studentid,firstname,lastname,branch , marksobtained,
+ROW_NUMBER() over(partition by branch order by marksobtained desc) as "ronum",
+rank() over(partition by branch ORDER BY marksobtained desc) as 'rnk',
+DENSE_RANK() over(partition by branch ORDER BY marksobtained desc) as 'dns.rnk' 
+from allstudents;
+
+
+## 2 nd highest mark with CTE
+
+
+
 
 with t as (
 select studentid,firstname,lastname,branch , marksobtained,
